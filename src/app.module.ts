@@ -5,6 +5,7 @@ import { EnvModule } from "./common/env/env.module";
 import { LoggerModule } from "./libs/logger/logger.module";
 import { APP_INTERCEPTOR } from "@nestjs/core";
 import { LogInterceptor } from "./common/interceptor/log.interceptor";
+import { DrizzleModule } from './libs/db/drizzle/drizzle.module';
 
 const interceptors = [
   {
@@ -14,7 +15,7 @@ const interceptors = [
 ];
 
 @Module({
-  imports: [EnvModule.forRoot(), LoggerModule],
+  imports: [EnvModule.forRoot(), LoggerModule, DrizzleModule],
   controllers: [AppController],
   providers: [AppService, ...interceptors],
 })
