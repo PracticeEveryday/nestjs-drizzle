@@ -4,7 +4,9 @@ import { EnvService } from "./common/env/env.service";
 import { EnvEnum } from "./common/env/env.enum";
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    bufferLogs: true,
+  });
 
   const envService = app.get(EnvService);
   const port = envService.getOrThrow(EnvEnum.PORT);
