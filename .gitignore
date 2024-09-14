@@ -3,3 +3,10 @@ node_modules
 
 # .idea intellj
 .idea
+
+#dist file
+dist
+
+# .env
+.env.test
+.env.dev
