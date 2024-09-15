@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1726383119445,
+      "tag": "20240915065159_polite_jack_power",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1726383563851,
+      "tag": "20240915065923_certain_microbe",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1726383640173,
+      "tag": "20240915070040_colossal_power_pack",
+      "breakpoints": true
+    }
+  ]
+}
