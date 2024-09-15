@@ -9,7 +9,7 @@ async function bootstrap() {
   });
 
   const envService = app.get(EnvService);
-  const port = envService.getOrThrow(EnvEnum.PORT);
+  const port = envService.getOrThrow<string>(EnvEnum.PORT);
 
   await app.listen(+port);
 }

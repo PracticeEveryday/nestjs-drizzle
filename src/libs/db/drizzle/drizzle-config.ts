@@ -4,18 +4,18 @@ import * as dotenv from "dotenv";
 dotenv.config(); // 환경 변수 로드
 
 export default defineConfig({
-  schema: "src/libs/db/drizzle/schema.ts",
   dialect: "mysql",
   out: "src/libs/db/drizzle/migrate",
+  schema: "src/libs/db/drizzle/schema.ts",
   migrations: {
     table: "migration",
     prefix: "supabase",
   },
   dbCredentials: {
-    host: process.env.DB_HOST,
-    user: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_DBNAME,
+    host: process.env.DB_HOST as string,
+    user: process.env.DB_USERNAME as string,
+    password: process.env.DB_PASSWORD as string,
+    database: process.env.DB_DBNAME as string,
     port: 3306,
   },
 });
