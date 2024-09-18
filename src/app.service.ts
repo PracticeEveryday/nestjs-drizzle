@@ -7,7 +7,7 @@ import * as schema from "./libs/db/drizzle/schema";
 export class AppService {
   constructor(
     @Inject(MYSQL_CONNECTION)
-    private readonly db: MySql2Database<typeof schema>, // 주입
+    private readonly db: MySql2Database<typeof schema>,
   ) {}
 
   async getHello(email: string) {
