@@ -11,3 +11,5 @@ dist
 .env
 .env.test
 .env.dev
+
+.DS_Store
