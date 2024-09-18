@@ -17,7 +17,7 @@ export const MYSQL_CONNECTION = "MYSQL_CONNECTION";
           user: envService.getOrThrow<string>(EnvEnum.DB_USERNAME),
           password: envService.getOrThrow<string>(EnvEnum.DB_PASSWORD),
           database: envService.getOrThrow<string>(EnvEnum.DB_DBNAME),
-          port: envService.getOrThrow<number>(EnvEnum.PORT),
+          port: envService.getOrThrow<number>(EnvEnum.DB_PORT),
         });
 
         return drizzle(pool, { schema, mode: "planetscale" });
