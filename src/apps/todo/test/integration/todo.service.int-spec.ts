@@ -1,13 +1,14 @@
 import { Test } from "@nestjs/testing";
 import { TodoService } from "../../todo.service";
 import { drizzleProvider } from "../../../../libs/db/drizzle/drizzle.provider";
+import { repositoryProvider } from "../../../../libs/db/drizzle/provider/repository.provider";
 
 describe("TodoService Int", () => {
   let todoService: TodoService;
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
-      providers: [TodoService, ...drizzleProvider],
+      providers: [TodoService, ...drizzleProvider, ...repositoryProvider],
     }).compile();
 
     todoService = moduleRef.get(TodoService);
@@ -15,11 +16,9 @@ describe("TodoService Int", () => {
 
   describe("createTodo()", () => {
     it("should create Todo", async () => {
-      const todo = await todoService.createTodo();
+      const todo = await todoService.createTodo("title");
 
-      expect(todo?.name).toBe("Test User");
-      expect(todo?.email).toBe("test@test.com");
-      expect(todo?.password).toBe("password");
+      expect(todo).toHaveLength(1);
     });
   });
 });
