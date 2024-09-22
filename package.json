@@ -19,6 +19,9 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
+
+    "db:restart": "docker-compose --profile test down && docker-compose --profile test --env-file .env.test up -d && sleep 10",
+    "pretest:int": "yarn db:restart && dotenv -e .env.test -- yarn run drizzle:db:push",
     "test:int": "dotenv -e .env.test -- jest -i --no-cache --watch --config jest-int.json",
     "------drizzle------": "----------------------------------------------------------------------",
     "drizzle:db:generate": "npx drizzle-kit generate --config src/libs/db/drizzle/drizzle-config.ts",
