@@ -14,13 +14,10 @@ export class TodoRepository implements ITodoRepository {
     private readonly db: MySql2Database<typeof schema>,
   ) {}
 
-  public async creteTodo(title: string): Promise<number[]> {
-    const newTodo = await this.db
-      .insert(schema.todo)
-      .values({ title })
-      .$returningId();
+  public async creteTodo(title: string): Promise<number> {
+    const newTodo = await this.db.insert(schema.todo).values({ title });
 
-    return newTodo.map((e) => e.id);
+    return newTodo[0].insertId;
   }
 
   public async findOneById(id: number): Promise<TodoDomain> {
@@ -39,13 +36,18 @@ export class TodoRepository implements ITodoRepository {
     return Mapper.toRequired<TodoDomain>(TodoDomain)(todo);
   }
 
-  public async executeTodo(todo: Required<TodoDomain>): Promise<number[]> {
-    const updatedTodoIds = await this.db
+  public async executeTodo(todo: TodoDomain): Promise<number> {
+    const resultSetHeader = await this.db
       .insert(schema.todo)
-      .values({ ...todo, isCompleted: !todo.isCompleted })
-      .onDuplicateKeyUpdate({ set: { id: todo.id } })
-      .$returningId();
+      .values({
+        id: todo.id,
+        isCompleted: true,
+        title: todo.title,
+      })
+      .onDuplicateKeyUpdate({
+        set: { isCompleted: true, title: todo.title },
+      });
 
-    return updatedTodoIds.map((e) => e.id);
+    return resultSetHeader[0].insertId;
   }
 }

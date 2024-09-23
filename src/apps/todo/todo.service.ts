@@ -10,7 +10,7 @@ export class TodoService {
     private readonly todoRepository: ITodoRepository,
   ) {}
 
-  public async createTodo(title: string): Promise<number[]> {
+  public async createTodo(title: string): Promise<number> {
     return this.todoRepository.creteTodo(title);
   }
 
@@ -22,18 +22,19 @@ export class TodoService {
     return await this.todoRepository.findOneByTitle(title);
   }
 
-  public async executeTodo(id: number): Promise<number[]> {
+  public async executeTodo(id: number): Promise<number> {
     const todo = await this.todoRepository.findOneById(id);
 
     if (todo.isCompleted) {
       throw new Error(`이미 실행된 ${todo.title}입니다.`);
     }
 
-    const todoListId = await this.todoRepository.executeTodo(todo);
-    if (!todoListId.find((e) => e === todo.id)) {
+    const todoId = await this.todoRepository.executeTodo(todo);
+
+    if (todoId !== todo.id) {
       throw new Error("업데이트 된 내역이 없습니다.");
     }
 
-    return todoListId;
+    return todoId;
   }
 }

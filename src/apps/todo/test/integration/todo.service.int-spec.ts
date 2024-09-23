@@ -5,7 +5,7 @@ import { repositoryProvider } from "../../../../libs/db/drizzle/provider/reposit
 
 describe("TodoService Int", () => {
   let todoService: TodoService;
-  let todoId = 0;
+  let testTodoId = 0;
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       providers: [TodoService, ...drizzleProvider, ...repositoryProvider],
@@ -16,10 +16,10 @@ describe("TodoService Int", () => {
 
   describe("createTodo()", () => {
     it("todo 생성 >> 생성 성공 시 생성된 ID를 배열에 담아 반환한다.", async () => {
-      const todoIdList = await todoService.createTodo("title");
+      const todoId = await todoService.createTodo("title");
 
-      expect(todoIdList).toHaveLength(1);
-      todoId = todoIdList[0];
+      expect(todoId).toBe(1);
+      testTodoId = todoId;
     });
 
     it("todo 생성 실패 >> title은 string만 받을 수 있다. 타입이 틀릴 경우 error를 반환한다.", async () => {
@@ -31,7 +31,7 @@ describe("TodoService Int", () => {
 
   describe("getTodoById()", () => {
     it("id로 todo 조회 성공 >> 조회 성공 시 해당 ID의 todo를 반환한다.", async () => {
-      const todo = await todoService.getTodoById(todoId);
+      const todo = await todoService.getTodoById(testTodoId);
 
       expect(todo.title).toBe("title");
       expect(todo.isCompleted).toBe(false);
@@ -60,14 +60,14 @@ describe("TodoService Int", () => {
   });
 
   describe("executeTodo()", () => {
-    it("Todo 실행 처리 성공 >> 성공 시 업데이트 된 id 배열을 반환한다.", async () => {
-      const todoIdList = await todoService.executeTodo(todoId);
+    it("Todo 실행 처리 성공 >> 성공 시 업데이트 된 id를 반환한다.", async () => {
+      const resultTodoId = await todoService.executeTodo(testTodoId);
 
-      expect(todoIdList).toHaveLength(1);
+      expect(resultTodoId).toBe(testTodoId);
     });
 
     it("Todo 실행 처리 실패 >> 이미 실행 처리된 id의 경우 에러를 반환한다.", async () => {
-      await expect(todoService.executeTodo(todoId)).rejects.toThrow();
+      await expect(todoService.executeTodo(testTodoId)).rejects.toThrow();
     });
 
     it("Todo 실행 처리 실패 >> todo가 존재하지 않는 id의 경우 에러를 반환한다.", async () => {
