@@ -1,9 +1,11 @@
 export class TodoDomain {
+  public id: number;
   public title: string;
-  public isComplete: boolean;
+  public isCompleted: boolean;
 
-  constructor(param: { title: string; isComplete: boolean }) {
+  constructor(param: { title: string; isCompleted: boolean; id: number }) {
     this.title = param.title;
-    this.isComplete = param.isComplete;
+    this.isCompleted = param.isCompleted;
+    this.id = param.id;
   }
 }

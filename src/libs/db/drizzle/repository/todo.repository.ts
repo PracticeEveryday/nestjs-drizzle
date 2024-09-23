@@ -30,4 +30,22 @@ export class TodoRepository implements ITodoRepository {
 
     return Mapper.toRequired<TodoDomain>(TodoDomain)(todo);
   }
+
+  public async findOneByTitle(title: string): Promise<TodoDomain> {
+    const todo = await this.db.query.todo.findFirst({
+      where: eq(schema.todo.title, title),
+    });
+
+    return Mapper.toRequired<TodoDomain>(TodoDomain)(todo);
+  }
+
+  public async executeTodo(todo: Required<TodoDomain>): Promise<number[]> {
+    const updatedTodoIds = await this.db
+      .insert(schema.todo)
+      .values({ ...todo, isCompleted: !todo.isCompleted })
+      .onDuplicateKeyUpdate({ set: { id: todo.id } })
+      .$returningId();
+
+    return updatedTodoIds.map((e) => e.id);
+  }
 }

@@ -10,5 +10,5 @@ export const user = mysqlTable("user", {
 export const todo = mysqlTable("todo", {
   id: int("id").primaryKey().autoincrement(),
   title: varchar("title", { length: 150 }).notNull(),
-  isComplete: boolean("isComplete").notNull().default(false),
+  isCompleted: boolean("isCompleted").notNull().default(false),
 });

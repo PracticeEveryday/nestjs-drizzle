@@ -34,7 +34,44 @@ describe("TodoService Int", () => {
       const todo = await todoService.getTodoById(todoId);
 
       expect(todo.title).toBe("title");
-      expect(todo.isComplete).toBe(false);
+      expect(todo.isCompleted).toBe(false);
+    });
+
+    it("todo 조회 실패 >> id는 number만 받을 수 있다. 타입이 틀릴 경우 error를 반환한다.", async () => {
+      const one: any = { id: "test" };
+
+      await expect(todoService.getTodoById(one)).rejects.toThrow();
+    });
+  });
+
+  describe("getTodoByTitle()", () => {
+    it("title로 todo 조회 성공 >> 조회 성공 시 title 이름과 일치하는 todo를 반환한다.", async () => {
+      const todo = await todoService.getTodoByTitle("title");
+
+      expect(todo.title).toBe("title");
+      expect(todo.isCompleted).toBe(false);
+    });
+
+    it("todo 조회 실패 >> title는 string만 받을 수 있다. 타입이 틀릴 경우 error를 반환한다.", async () => {
+      const one: any = { title: "test" };
+
+      await expect(todoService.getTodoByTitle(one)).rejects.toThrow();
+    });
+  });
+
+  describe("executeTodo()", () => {
+    it("Todo 실행 처리 성공 >> 성공 시 업데이트 된 id 배열을 반환한다.", async () => {
+      const todoIdList = await todoService.executeTodo(todoId);
+
+      expect(todoIdList).toHaveLength(1);
+    });
+
+    it("Todo 실행 처리 실패 >> 이미 실행 처리된 id의 경우 에러를 반환한다.", async () => {
+      await expect(todoService.executeTodo(todoId)).rejects.toThrow();
+    });
+
+    it("Todo 실행 처리 실패 >> todo가 존재하지 않는 id의 경우 에러를 반환한다.", async () => {
+      await expect(todoService.executeTodo(10000000)).rejects.toThrow();
     });
   });
 });
