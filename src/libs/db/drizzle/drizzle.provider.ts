@@ -1,22 +1,23 @@
-import { createPool } from "mysql2/promise";
-import { drizzle } from "drizzle-orm/mysql2";
-import * as schema from "./schema";
+import { drizzle } from 'drizzle-orm/mysql2';
+import { createPool } from 'mysql2/promise';
 
-export const MYSQL_CONNECTION = "MYSQL_CONNECTION";
+import * as schema from './schema';
+
+export const MYSQL_CONNECTION = 'MYSQL_CONNECTION';
 
 export const drizzleProvider = [
-  {
-    provide: MYSQL_CONNECTION,
-    useFactory: async () => {
-      const pool = createPool({
-        host: process.env.DB_HOST,
-        user: process.env.DB_USERNAME,
-        password: process.env.DB_PASSWORD,
-        database: process.env.DB_DBNAME,
-        port: +process.env.DB_PORT!,
-      });
+    {
+        provide: MYSQL_CONNECTION,
+        useFactory: async () => {
+            const pool = createPool({
+                host: process.env.DB_HOST,
+                user: process.env.DB_USERNAME,
+                password: process.env.DB_PASSWORD,
+                database: process.env.DB_DBNAME,
+                port: +process.env.DB_PORT!,
+            });
 
-      return drizzle(pool, { schema, mode: "planetscale" });
+            return drizzle(pool, { schema, mode: 'planetscale' });
+        },
     },
-  },
 ];
