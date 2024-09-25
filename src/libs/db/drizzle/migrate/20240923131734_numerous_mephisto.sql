@@ -1,0 +1,1 @@
+ALTER TABLE `todo` RENAME COLUMN `isComplete` TO `isCompleted`;

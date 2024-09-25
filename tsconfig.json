@@ -18,6 +18,13 @@
     "noFallthroughCasesInSwitch": false,
     "strict": true,
     "noImplicitAny": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    // 해당 paths 추가 시 ./jest-int.json에도 추가해줘야함
+    "paths": {
+      "@TODO/*": ["src/apps/todo/*"],
+      "@COMMON/*": ["src/common/*"],
+      "@DB/*": ["src/libs/db/*"],
+      "@LOGGER/*": ["src/libs/logger/*"]
+    }
   }
 }

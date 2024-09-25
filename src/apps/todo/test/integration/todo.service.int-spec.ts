@@ -1,7 +1,7 @@
 import { Test } from "@nestjs/testing";
 import { TodoService } from "../../todo.service";
-import { drizzleProvider } from "../../../../libs/db/drizzle/drizzle.provider";
-import { repositoryProvider } from "../../../../libs/db/drizzle/provider/repository.provider";
+import { drizzleProvider } from "@DB/drizzle/drizzle.provider";
+import { repositoryProvider } from "@DB/drizzle/provider/repository.provider";
 
 describe("TodoService Int", () => {
   let todoService: TodoService;

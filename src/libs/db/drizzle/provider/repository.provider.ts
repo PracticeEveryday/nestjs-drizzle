@@ -1,4 +1,3 @@
-import { MYSQL_CONNECTION } from "../drizzle.provider";
 import { TodoRepository } from "../repository/todo.repository";
 import { RepositoryToken } from "./repository.token";
 

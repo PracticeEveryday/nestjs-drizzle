@@ -1,6 +1,6 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { ITodoRepository } from "./interface/todo.repository.interface";
-import { RepositoryToken } from "../../libs/db/drizzle/provider/repository.token";
+import { RepositoryToken } from "@DB/drizzle/provider/repository.token";
 import { TodoDomain } from "./domain/todo.domain";
 
 @Injectable()

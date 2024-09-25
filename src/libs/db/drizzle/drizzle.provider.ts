@@ -1,6 +1,4 @@
-import { EnvService } from "../../../common/env/env.service";
 import { createPool } from "mysql2/promise";
-import { EnvEnum } from "../../../common/env/env.enum";
 import { drizzle } from "drizzle-orm/mysql2";
 import * as schema from "./schema";
 

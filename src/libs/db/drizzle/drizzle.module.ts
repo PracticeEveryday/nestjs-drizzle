@@ -1,6 +1,5 @@
 import { Global, Module } from "@nestjs/common";
 import { drizzleProvider, MYSQL_CONNECTION } from "./drizzle.provider";
-import { TodoRepository } from "./repository/todo.repository";
 import { repositoryProvider } from "./provider/repository.provider";
 
 @Global()
