@@ -27,7 +27,7 @@ export class TodoRepository implements ITodoRepository {
             where: eq(schema.todo.id, id),
         });
 
-        return Mapper.toRequired<TodoDomain>(TodoDomain)(todo);
+        return Mapper.toRequired<TodoDomain, [{ title: string; isCompleted: boolean; id: number }]>(TodoDomain)(todo);
     }
 
     public async findOneByTitle(title: string): Promise<TodoDomain> {
@@ -35,7 +35,7 @@ export class TodoRepository implements ITodoRepository {
             where: eq(schema.todo.title, title),
         });
 
-        return Mapper.toRequired<TodoDomain>(TodoDomain)(todo);
+        return Mapper.toRequired<TodoDomain, [{ title: string; isCompleted: boolean; id: number }]>(TodoDomain)(todo);
     }
 
     public async executeTodo(todo: TodoDomain): Promise<number> {
