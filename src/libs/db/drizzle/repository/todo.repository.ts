@@ -3,6 +3,7 @@ import { eq } from 'drizzle-orm';
 import { MySql2Database } from 'drizzle-orm/mysql2';
 
 import { TodoDomain } from '@TODO/domain/todo.domain';
+import { TTodoProps } from '@TODO/interface/todo.interface';
 import { ITodoRepository } from '@TODO/interface/todo.repository.interface';
 
 import { Mapper } from '../../../mapper/mapper';
@@ -27,7 +28,7 @@ export class TodoRepository implements ITodoRepository {
             where: eq(schema.todo.id, id),
         });
 
-        return Mapper.toRequired<TodoDomain, [{ title: string; isCompleted: boolean; id: number }]>(TodoDomain)(todo);
+        return Mapper.toRequired<TodoDomain, TTodoProps>(TodoDomain)(todo);
     }
 
     public async findOneByTitle(title: string): Promise<TodoDomain> {
@@ -35,7 +36,7 @@ export class TodoRepository implements ITodoRepository {
             where: eq(schema.todo.title, title),
         });
 
-        return Mapper.toRequired<TodoDomain, [{ title: string; isCompleted: boolean; id: number }]>(TodoDomain)(todo);
+        return Mapper.toRequired<TodoDomain, TTodoProps>(TodoDomain)(todo);
     }
 
     public async executeTodo(todo: TodoDomain): Promise<number> {

@@ -1,8 +1,8 @@
-export type TTodoEssentialProp = Required<{
+export type TTodoEssentialProps = Required<{
     readonly title: string;
-    readonly projectId: string;
+    readonly isCompleted: boolean;
 }>;
 
 export type TTodoOptionalProps = Partial<{ readonly id: number }>;
 
-export type ProjectProperties = TTodoEssentialProp & Required<TTodoOptionalProps>;
+export type TTodoProps = TTodoEssentialProps & Required<TTodoOptionalProps>;
