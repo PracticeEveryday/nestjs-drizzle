@@ -53,4 +53,13 @@ export class TodoRepository implements ITodoRepository {
 
         return resultSetHeader[0].insertId;
     }
+
+    public async deleteOneById(todo: TodoDomain) {
+        const resultSetHeader = await this.db.delete(schema.todo).where(eq(schema.todo.id, todo.id));
+        if (resultSetHeader[0].affectedRows === 1) {
+            return todo.id;
+        } else {
+            throw new Error('삭제에 실패했습니다.');
+        }
+    }
 }

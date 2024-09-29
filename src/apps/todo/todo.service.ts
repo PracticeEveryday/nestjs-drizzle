@@ -39,4 +39,10 @@ export class TodoService {
 
         return todoId;
     }
+
+    public async deleteTodoById(id: number) {
+        const todo = await this.todoRepository.findOneById(id);
+
+        return await this.todoRepository.deleteOneById(todo);
+    }
 }

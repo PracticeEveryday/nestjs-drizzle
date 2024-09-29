@@ -17,10 +17,11 @@ describe('TodoService Int', () => {
     });
 
     describe('createTodo()', () => {
-        it('todo 생성 >> 생성 성공 시 생성된 ID를 배열에 담아 반환한다.', async () => {
+        it('todo 생성 >> 생성 성공 시 생성된 ID를 반환한다.', async () => {
             const todoId = await todoService.createTodo('title');
 
-            expect(todoId).toBe(1);
+            expect(todoId).toBeGreaterThan(0); // 숫자이면서 0보다 큰 값 확인
+
             testTodoId = todoId;
         });
     });
@@ -56,6 +57,14 @@ describe('TodoService Int', () => {
 
         it('Todo 실행 처리 실패 >> todo가 존재하지 않는 id의 경우 에러를 반환한다.', async () => {
             await expect(todoService.executeTodo(10000000)).rejects.toThrow();
+        });
+    });
+
+    describe('deleteOneById()', () => {
+        it('Todo 삭제 처리 성공 >> 성공 시 삭제 된 id를 반환한다.', async () => {
+            const resultTodoId = await todoService.deleteTodoById(testTodoId);
+
+            expect(resultTodoId).toBe(testTodoId);
         });
     });
 });

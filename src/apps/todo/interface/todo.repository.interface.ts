@@ -5,4 +5,5 @@ export interface ITodoRepository {
     findOneById(id: number): Promise<TodoDomain>;
     findOneByTitle(title: string): Promise<TodoDomain>;
     executeTodo(todo: TodoDomain): Promise<number>;
+    deleteOneById(todo: TodoDomain): Promise<number>;
 }
