@@ -23,6 +23,8 @@
 ### 테스트 환경 세팅
 1. git clone https://github.com/PracticeEveryday/nestjs-drizzle.git
 2. mv .env.test.template .env.test
+3. yarn setup:test:db
+4. yarn dotenv -e .env.test -- yarn run drizzle:db:push
 
 ### Test 코드 작성 컨벤션
 [AAA Pattern](https://velog.io/@fkszm3/testing-unit-test%EA%B8%B0%EC%B4%88-AAA-Pattern) 사용
