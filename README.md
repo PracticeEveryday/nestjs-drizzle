@@ -20,6 +20,10 @@
 서비스 로직 검증 과정은 `통합 테스트`로 진행합니다.   
 통합 테스트는 실제 데이터 베이스와 동일 환경에서 실행하기 위해 도커 컨테이너를 사용하고 있습니다.
 
+### 테스트 환경 세팅
+git clone https://github.com/PracticeEveryday/nestjs-drizzle.git
+mv .env.test.template .env.test
+
 ### Test 코드 작성 컨벤션
 [AAA Pattern](https://velog.io/@fkszm3/testing-unit-test%EA%B8%B0%EC%B4%88-AAA-Pattern) 사용
 
