@@ -66,5 +66,9 @@ describe('TodoService Int', () => {
 
             expect(resultTodoId).toBe(testTodoId);
         });
+
+        it('Todo 삭제  >> 실패 >> todo가 존재하지 않는 삭제 시 에러를 반환한다.', async () => {
+            await expect(todoService.deleteTodoById(10000000)).rejects.toThrow();
+        });
     });
 });
